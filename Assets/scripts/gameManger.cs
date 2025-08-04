@@ -2,6 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Threading;
+using System.Security.Cryptography.X509Certificates;
+using System;
 
 [DefaultExecutionOrder(-1)]
 public class gameManager : MonoBehaviour
@@ -13,14 +16,18 @@ public class gameManager : MonoBehaviour
     public float gameSpeed { get; private set; }
     public TextMeshProUGUI gameOverText;
     public Button retryButton;
+    public TextMeshProUGUI score;
+    public TextMeshProUGUI highscore;
+
+    private float scoree;
+
 
 
 
     private PlayerMovement player;
     private Spawner spawner;
 
-    private float score;
-    public float Score => score;
+    
 
     private void Awake()
     {
@@ -83,7 +90,8 @@ public class gameManager : MonoBehaviour
     private void Update()
     {
         gameSpeed += gameSpeedIncrease * Time.deltaTime;
-      
+        scoree += gameSpeed * Time.deltaTime;
+        score.text = Mathf.FloorToInt(scoree).ToString("D5");
     }
 
     

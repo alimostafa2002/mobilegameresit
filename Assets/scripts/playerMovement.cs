@@ -12,10 +12,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Always running (in place)
-        animator.SetFloat("runSpeed", runSpeed); // Triggers run animation constantly
+        // Always play run animation
+        animator.SetFloat("runSpeed", runSpeed);
 
-        // Handle jump input
+        // ✅ Allow spacebar on ALL platforms (editor, desktop, mobile simulator)
         if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.Space))
         {
             jump = true;
@@ -24,26 +24,28 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // ❗ Set horizontalMove to 0 to prevent actual movement
+        // Prevent horizontal movement, only jump
         characterController.Move(0f, false, jump);
         jump = false;
     }
-    
+
+    // ✅ Public method for UI Button to call
+    public void OnJumpButtonPressed()
+    {
+        jump = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Obstacle"))
         {
             Debug.Log("Player hit an obstacle!");
 
-            // 🔧 Tell the camera to stop following before destroying player
+            // Stop camera from following
             Camera.main.GetComponent<camerafollow>().ClearTarget();
 
-            // 🗑️ Destroy the player
-
+            // Trigger game over
             gameManager.instance.GameOver();
-
-
-
         }
     }
 }
