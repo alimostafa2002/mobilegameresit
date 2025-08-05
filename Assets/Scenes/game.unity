@@ -1546,8 +1546,8 @@ MonoBehaviour:
   gameSpeedIncrease: 1
   gameOverText: {fileID: 878619152}
   retryButton: {fileID: 1901703682}
-  score: {fileID: 0}
-  highscore: {fileID: 0}
+  score: {fileID: 1829138340}
+  highscore: {fileID: 1683548845}
 --- !u!4 &2005173401
 Transform:
   m_ObjectHideFlags: 0
